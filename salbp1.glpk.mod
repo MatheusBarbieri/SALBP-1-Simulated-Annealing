@@ -30,8 +30,19 @@ s.t. precedence{i in 1..N, j in 1..N, b in 1..S}: x[b,j] * p[i,j] <= sum{s in b.
 solve;
 
 # Report / Result Section (Optional)
-printf '#################################\n';
-printf 'SALBP-1 result\n';
+printf '\n#################################\n';
+printf 'SALBP-1 / LP Model Result\n';
 printf '\n';
 printf 'm = %d\n', m;
+printf '\nN\\S ';
+for {s in 1..S} {
+    printf '%3d', s;
+}
 printf '\n';
+for {i in 1..N} {
+    printf ' %2d ', i;
+    for {s in 1..S} {
+        printf '%3d', x[s,i];
+    }
+    printf '\n';
+}
