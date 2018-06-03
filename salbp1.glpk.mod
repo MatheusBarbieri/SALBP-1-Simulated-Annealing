@@ -22,9 +22,9 @@ var y{1..S} binary;
 minimize m: sum{s in 1..S} y[s];
 
 s.t. task_allocation{i in 1..N}: sum{s in 1..S} x[s,i] = 1;
-s.t. station_use{s in 1..S}: sum{i in 1..N} x[s,i] <= y[s] * 10000;
+s.t. station_use{s in 1..S}: sum{i in 1..N} x[s,i] <= y[s] * S;
 s.t. cycle_time{s in 1..S}: sum{i in 1..N} x[s,i] * t[i] <= c;
-s.t. precedence{i in 1..N, j in 1..N, b in 1..S}: x[b,j] * p[i,j] <= sum{s in b..S} x[s,i];
+s.t. precedence{i in 1..(N-1), j in (i+1)..N, b in 1..S}: x[b,j] * p[i,j] <= sum{s in b..S} x[s,i];
 
 
 solve;
