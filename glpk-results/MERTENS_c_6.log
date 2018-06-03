@@ -1,0 +1,58 @@
+GLPSOL: GLPK LP/MIP Solver, v4.65
+Parameter(s) specified in the command line:
+ -m salbp1.glpk.mod -d glpk-instances/MERTENS_c_6.mod --tmlim 3600 --memlim
+ 7000 --log glpk-results/MERTENS_c_6.log
+Reading model section from salbp1.glpk.mod...
+salbp1.glpk.mod:48: warning: unexpected end of file; missing end statement inserted
+48 lines were read
+Reading data section from glpk-instances/MERTENS_c_6.mod...
+glpk-instances/MERTENS_c_6.mod:22: warning: final NL missing before end of file
+glpk-instances/MERTENS_c_6.mod:22: warning: unexpected end of file; missing end statement inserted
+22 lines were read
+Generating m...
+Generating task_allocation...
+Generating station_use...
+Generating cycle_time...
+Generating precedence...
+Model has been successfully generated
+GLPK Integer Optimizer, v4.65
+169 rows, 56 columns, 749 non-zeros
+56 integer variables, all of which are binary
+Preprocessing...
+21 rows, 56 columns, 154 non-zeros
+56 integer variables, all of which are binary
+Scaling...
+ A: min|aij| =  1.000e+00  max|aij| =  7.000e+00  ratio =  7.000e+00
+Problem data seem to be well scaled
+Constructing initial basis...
+Size of triangular part is 21
+Solving LP relaxation...
+GLPK Simplex Optimizer, v4.65
+21 rows, 56 columns, 154 non-zeros
+      0: obj =   0.000000000e+00 inf =   3.000e+01 (2)
+     18: obj =   1.642857143e+00 inf =   0.000e+00 (0)
+*    19: obj =   1.000000000e+00 inf =   0.000e+00 (0)
+OPTIMAL LP SOLUTION FOUND
+Integer optimization begins...
+Long-step dual simplex will be used
++    19: mip =     not found yet >=              -inf        (1; 0)
++   436: >>>>>   6.000000000e+00 >=   2.000000000e+00  66.7% (86; 19)
++ 11983: mip =   6.000000000e+00 >=     tree is empty   0.0% (0; 4747)
+INTEGER OPTIMAL SOLUTION FOUND
+Time used:   0.2 secs
+Memory used: 1.0 Mb (1029632 bytes)
+
+#################################
+SALBP-1 / LP Model Result
+
+m = 6
+
+N\S   1  2  3  4  5  6  7
+  1   0  0  1  0  0  0  0
+  2   0  0  1  0  0  0  0
+  3   0  0  0  0  1  0  0
+  4   0  0  0  1  0  0  0
+  5   1  0  0  0  0  0  0
+  6   0  0  0  0  0  1  0
+  7   0  1  0  0  0  0  0
+Model has been successfully processed
