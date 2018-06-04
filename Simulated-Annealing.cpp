@@ -2,6 +2,7 @@
 #include <fstream>
 #include <cstring>
 #include <vector>
+#include <algorithm>
 
 int numberOfTasks;
 std::vector<int> taskTimes;
@@ -14,7 +15,7 @@ private:
 public:
     Solution();
     int evalSolution();
-    bool validatePrecedence();
+    bool isValidPrecedence();
     Solution neighboor();
     void printSolution();
 };
@@ -34,11 +35,19 @@ void Solution::printSolution() {
 }
 
 int Solution::evalSolution(){
-
+    std::vector<int> v(tasks);
+    std::sort(v.begin(), v.end());
+    long count = std::unique(v.begin(), v.end()) - v.begin();
+    return (int) count;
 }
 
-bool Solution::validatePrecedence(){
-
+bool Solution::isValidPrecedence(){
+    for (auto &i : precedenceOrder) {
+        if(tasks[i[0]] >= tasks[i[1]]){
+            return false;
+        }
+    }
+    return true;
 }
 
 Solution Solution::neighboor(){
@@ -58,8 +67,6 @@ void readFile(std::string &fileName){
         if (currentValue == -1){
             break;
         }
-
-
         int predecessor = currentValue;
         int successor;
         file.ignore(1);
@@ -79,10 +86,9 @@ int main(int argc, char **argv) {
                      " <iterations-before-decay> <limit-temperature> <seed>" << std::endl;
         return -1;
     } else {
-        inputFileName = argv    [1];
+        inputFileName = argv[1];
     }
 
     readFile(inputFileName);
-
     return 0;
 }
