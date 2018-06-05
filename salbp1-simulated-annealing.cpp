@@ -5,6 +5,7 @@
 #include <algorithm>
 
 int numberOfTasks;
+int c;
 std::vector<int> taskTimes;
 std::vector<std::vector <int>> precedenceOrder;
 
@@ -16,7 +17,8 @@ public:
     Solution();
     int evalSolution();
     bool isValidPrecedence();
-    Solution neighboor();
+    bool isValidTimes();
+    // Solution neighboor();
     void printSolution();
 };
 
@@ -50,9 +52,20 @@ bool Solution::isValidPrecedence(){
     return true;
 }
 
-Solution Solution::neighboor(){
-
+bool Solution::isValidTimes(){
+    std::vector<int> stationTimes(numberOfTasks, 0);
+    for (int i=0; i<numberOfTasks; i++) {
+        stationTimes[tasks[i]] += taskTimes[i];
+        if (stationTimes[tasks[i]] > c){
+            return false;
+        }
+    }
+    return true;
 }
+
+// Solution Solution::neighboor(){
+//   return;
+// }
 
 void readFile(std::string &fileName){
     std::ifstream file;
@@ -80,13 +93,14 @@ void readFile(std::string &fileName){
 int main(int argc, char **argv) {
     std::string inputFileName;
 
-    if (argc < 7){
+    if (argc < 8){
         std::cout << "Incorret Usage! Correct Usage:\n\t"
-                     "./simulated-annealing <inputfile> <temperature> <decay>"
+                     "./salbp1-sa <inputfile> <cycle-time> <temperature> <decay>"
                      " <iterations-before-decay> <limit-temperature> <seed>" << std::endl;
         return -1;
     } else {
         inputFileName = argv[1];
+        c = atoi(argv[2]);
     }
 
     readFile(inputFileName);
