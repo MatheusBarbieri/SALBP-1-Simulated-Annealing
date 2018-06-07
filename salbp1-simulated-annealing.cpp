@@ -1,24 +1,32 @@
-#include <iostream>
-#include <fstream>
-#include <cstring>
-#include <vector>
 #include <algorithm>
+#include <cmath>
+#include <cstdlib>
+#include <cstring>
+#include <fstream>
+#include <iostream>
+#include <utility> #include <vector>
 
-int numberOfTasks;
-int c;
+class Solution;
+
+int numberOfTasks, cycleTime, iterations, seed;
+double temperature, decay, temperatureLimit;
 std::vector<int> taskTimes;
 std::vector<std::vector <int>> precedenceOrder;
+std::string inputFileName;
+
 
 class Solution{
 private:
     std::vector<int> tasks;
-
+    long value;
 public:
     Solution();
+    explicit Solution(std::vector<int> tasks);
+    long getValue() const;
     int evalSolution();
     bool isValidPrecedence();
     bool isValidTimes();
-    // Solution neighboor();
+    Solution neighbour();
     void printSolution();
 };
 
@@ -28,11 +36,19 @@ Solution::Solution(){
         initialSolution[i] = i;
     }
     tasks = initialSolution;
+    value = evalSolution();
+}
+
+Solution::Solution(std::vector<int> tasks){
+    this->tasks = std::move(tasks);
+    value = evalSolution();
 }
 
 void Solution::printSolution() {
+    std::cout << "Best value: " << getValue() << std::endl;
+    std::cout << "Solution:" << std::endl;
     for(int i=0; i<numberOfTasks; i++)
-        std::cout << tasks[i] << " ";
+        std::cout << "\tTask " << i << " on station " << tasks[i] << std::endl;
     std::cout << std::endl;
 }
 
@@ -56,16 +72,33 @@ bool Solution::isValidTimes(){
     std::vector<int> stationTimes(numberOfTasks, 0);
     for (int i=0; i<numberOfTasks; i++) {
         stationTimes[tasks[i]] += taskTimes[i];
-        if (stationTimes[tasks[i]] > c){
+        if (stationTimes[tasks[i]] > cycleTime){
             return false;
         }
     }
     return true;
 }
 
-// Solution Solution::neighboor(){
-//   return;
-// }
+bool acceptWorseSolution(){
+    float zeroToOne = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/1.0));
+    return temperature > zeroToOne;
+}
+
+Solution Solution::neighbour(){
+    while(true) {
+        std::vector<int> newTasks(tasks);
+        long location = rand() % numberOfTasks;
+        newTasks[location] += (rand() % 2 ? 1 : -1);
+        Solution neigh(newTasks);
+        if (neigh.isValidPrecedence() && neigh.isValidTimes()) {
+            return neigh;
+        }
+    }
+}
+
+long Solution::getValue() const {
+    return value;
+}
 
 void readFile(std::string &fileName){
     std::ifstream file;
@@ -91,8 +124,6 @@ void readFile(std::string &fileName){
 }
 
 int main(int argc, char **argv) {
-    std::string inputFileName;
-
     if (argc < 8){
         std::cout << "Incorret Usage! Correct Usage:\n\t"
                      "./salbp1-sa <inputfile> <cycle-time> <temperature> <decay>"
@@ -100,9 +131,37 @@ int main(int argc, char **argv) {
         return -1;
     } else {
         inputFileName = argv[1];
-        c = atoi(argv[2]);
+        cycleTime = atoi(argv[2]);
+        temperature = atof(argv[3]);
+        decay = atof(argv[4]);
+        iterations = atoi(argv[5]);
+        temperatureLimit = atof(argv[6]);
+        seed = atoi(argv[7]);
     }
 
     readFile(inputFileName);
+    srand((u_int) seed);
+
+    Solution currentSolution;
+    Solution best = currentSolution;
+
+    while(temperature > temperatureLimit){
+        for(int i=0; i<iterations; i++){
+            Solution neighbour = currentSolution.neighbour();
+            if(neighbour.getValue() < currentSolution.getValue()){
+                currentSolution = neighbour;
+            } else {
+                if(acceptWorseSolution()){
+                    currentSolution = neighbour;
+                }
+            }
+            if(neighbour.getValue() < best.getValue()){
+                best = neighbour;
+            }
+        }
+        temperature *= decay;
+    }
+
+    best.printSolution();
     return 0;
 }
