@@ -94,7 +94,9 @@ Solution Solution::neighbour(){
     while(true) {
         std::vector<int> newTasks(tasks);
         long location = rand() % numberOfTasks;
-        newTasks[location] += (rand() % 2 ? 1 : -1);
+        long newStation = rand() % numberOfTasks;
+        //newTasks[location] += (rand() % 2 ? 1 : -1);
+        newTasks[location] = newStation;
         Solution neigh(newTasks);
         if (neigh.isValidPrecedence() && neigh.isValidTimes()) {
             return neigh;
