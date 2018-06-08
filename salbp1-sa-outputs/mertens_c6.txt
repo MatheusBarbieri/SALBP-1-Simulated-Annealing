@@ -1,0 +1,27 @@
+..............................................................................................................
+
+################### Instance ###################
+Seed: 1528440815
+Number of tasks: 7
+Cycle time: 6
+Precedence Order:
+	1->2 	1->4 	2->3
+	2->5 	4->7 	5->6
+
+Task times:
+	(1)1u.t.	(2)5u.t.	(3)4u.t.
+	(4)3u.t.	(5)5u.t.	(6)6u.t.
+	(7)5u.t.
+
+################### Solution ###################
+Best value: 6
+Used Stations: 
+	Station 1 tasks: 1, 4
+	Station 2 tasks: 2
+	Station 3 tasks: 3
+	Station 4 tasks: 5
+	Station 5 tasks: 6
+	Station 6 tasks: 7
+
+Parameters to reproduce this execution:
+	-c 6 -t 1 -l 0.000010 -d 0.900000 -i 1000 -s 1528440815

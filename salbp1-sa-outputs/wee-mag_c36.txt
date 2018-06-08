@@ -1,0 +1,93 @@
+..............................................................................................................
+
+################### Instance ###################
+Seed: 1528440843
+Number of tasks: 75
+Cycle time: 36
+Precedence Order:
+	1->2 	1->3 	1->4 	1->5 	1->6 	1->7 	2->15 	3->13 	3->24 	4->8
+	4->14 	4->16 	5->12 	5->15 	6->9 	6->10 	6->11 	6->13 	9->20 	9->24
+	10->18 	12->19 	13->22 	15->17 	15->20 	15->23 	16->21 	16->26 	17->30 	18->26
+	18->30 	20->27 	21->33 	24->25 	25->28 	25->30 	25->33 	25->34 	26->31 	26->32
+	26->41 	27->29 	27->35 	27->36 	31->37 	31->39 	32->44 	32->45 	33->41 	35->38
+	35->42 	36->40 	36->43 	39->51 	40->46 	42->47 	43->48 	43->50 	46->51 	46->48
+	47->49 	47->50 	47->52 	47->53 	49->59 	49->61 	49->62 	50->54 	50->55 	50->60
+	50->62 	52->56 	52->57 	53->58 	55->63 	58->65 	59->64 	59->66 	62->67 	66->68
+	68->69 	68->70 	68->71 	68->72 	68->73 	68->74 	68->75 
+Task times:
+	(1)23u.t.	(2)24u.t.	(3)25u.t.	(4)26u.t.	(5)23u.t.	(6)22u.t.	(7)6u.t.	(8)22u.t.	(9)23u.t.
+	(10)21u.t.	(11)22u.t.	(12)15u.t.	(13)5u.t.	(14)23u.t.	(15)4u.t.	(16)26u.t.	(17)21u.t.	(18)5u.t.
+	(19)24u.t.	(20)25u.t.	(21)26u.t.	(22)26u.t.	(23)24u.t.	(24)27u.t.	(25)20u.t.	(26)23u.t.	(27)25u.t.
+	(28)13u.t.	(29)3u.t.	(30)11u.t.	(31)21u.t.	(32)22u.t.	(33)21u.t.	(34)22u.t.	(35)25u.t.	(36)8u.t.
+	(37)22u.t.	(38)24u.t.	(39)22u.t.	(40)21u.t.	(41)6u.t.	(42)26u.t.	(43)22u.t.	(44)6u.t.	(45)21u.t.
+	(46)25u.t.	(47)11u.t.	(48)22u.t.	(49)21u.t.	(50)25u.t.	(51)22u.t.	(52)22u.t.	(53)23u.t.	(54)22u.t.
+	(55)22u.t.	(56)25u.t.	(57)23u.t.	(58)21u.t.	(59)22u.t.	(60)22u.t.	(61)22u.t.	(62)22u.t.	(63)21u.t.
+	(64)27u.t.	(65)23u.t.	(66)2u.t.	(67)26u.t.	(68)25u.t.	(69)24u.t.	(70)22u.t.	(71)24u.t.	(72)4u.t.
+	(73)22u.t.	(74)10u.t.	(75)25u.t.
+
+################### Solution ###################
+Best value: 60
+Used Stations: 
+	Station 1 tasks: 1
+	Station 2 tasks: 4
+	Station 3 tasks: 2
+	Station 4 tasks: 6
+	Station 5 tasks: 5, 15
+	Station 6 tasks: 9
+	Station 7 tasks: 14
+	Station 8 tasks: 20
+	Station 9 tasks: 27
+	Station 10 tasks: 10
+	Station 11 tasks: 16, 36
+	Station 12 tasks: 3
+	Station 13 tasks: 7, 24
+	Station 14 tasks: 11
+	Station 15 tasks: 12, 17
+	Station 16 tasks: 18, 23
+	Station 17 tasks: 25
+	Station 18 tasks: 26
+	Station 19 tasks: 13, 21
+	Station 20 tasks: 22
+	Station 21 tasks: 40
+	Station 22 tasks: 31
+	Station 23 tasks: 32
+	Station 24 tasks: 19
+	Station 25 tasks: 33
+	Station 26 tasks: 35
+	Station 27 tasks: 38
+	Station 28 tasks: 29, 37
+	Station 29 tasks: 42
+	Station 30 tasks: 47, 53
+	Station 31 tasks: 45
+	Station 32 tasks: 39
+	Station 33 tasks: 43
+	Station 34 tasks: 8
+	Station 35 tasks: 58
+	Station 36 tasks: 49
+	Station 37 tasks: 34
+	Station 38 tasks: 50
+	Station 39 tasks: 61
+	Station 40 tasks: 52
+	Station 41 tasks: 62
+	Station 42 tasks: 55
+	Station 43 tasks: 60
+	Station 44 tasks: 57
+	Station 45 tasks: 46
+	Station 46 tasks: 41, 56
+	Station 47 tasks: 48
+	Station 48 tasks: 54
+	Station 49 tasks: 28, 63
+	Station 50 tasks: 30, 59
+	Station 51 tasks: 44, 65
+	Station 52 tasks: 66, 67
+	Station 53 tasks: 68
+	Station 54 tasks: 69
+	Station 55 tasks: 70
+	Station 56 tasks: 71, 74
+	Station 57 tasks: 64
+	Station 58 tasks: 73
+	Station 59 tasks: 51
+	Station 60 tasks: 72, 75
+
+Parameters to reproduce this execution:
+	-c 36 -t 1 -l 0.000010 -d 0.900000 -i 1000 -s 1528440843
