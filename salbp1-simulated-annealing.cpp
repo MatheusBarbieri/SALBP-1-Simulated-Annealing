@@ -41,20 +41,43 @@ public:
     Solution neighbour();
     void printSolution();
     void printSimple();
+    void generateInitialSolition_v1();
+    void generateInitialSolition_v2();
 };
 
 Solution::Solution(){
-    std::vector<int> initialSolution((unsigned long)numberOfTasks);
-    for(int i=0; i<numberOfTasks; i++){
-        initialSolution[i] = i;
-    }
-    tasks = initialSolution;
+    generateInitialSolition_v2();
     value = evalSolution();
 }
 
 Solution::Solution(std::vector<int> tasks){
     this->tasks = std::move(tasks);
     value = evalSolution();
+}
+
+
+void Solution::generateInitialSolition_v1(){
+    tasks = std::vector<int>((unsigned long)numberOfTasks);
+    std::cout << "generating initial solution v1" << '\n';
+    for (int i=0; i<numberOfTasks; i++) {
+        tasks[i] = i;
+    }
+}
+
+void Solution::generateInitialSolition_v2(){
+    tasks = std::vector<int>((unsigned long)numberOfTasks);
+    std::cout << "generating initial solution v2" << '\n';
+    int si = 0;
+    int ci = 0;
+    for (int i=0; i<numberOfTasks; i++) {
+        if (ci + taskTimes[i] <= cycleTime) {
+            ci += taskTimes[i];
+            tasks[i] = si;
+        } else {
+            ci = taskTimes[i];
+            tasks[i] = ++si;
+        }
+    }
 }
 
 int Solution::evalSolution(){
