@@ -21,11 +21,11 @@ double initialTemperature = 1;
 double temperatureLimit = 0.00001;
 double decay = 0.9;
 int iterations = 1000;
+int restarts = 1;
 long seed = 0;
 
 //misc
 bool verbose = false;
-
 
 class Solution{
 private:
@@ -42,11 +42,11 @@ public:
     void printSolution();
     void printSimple();
     void generateInitialSolition_v1();
-    void generateInitialSolition_v2();
+    void generateInitialSolution();
 };
 
 Solution::Solution(){
-    generateInitialSolition_v2();
+    generateInitialSolution();
     value = evalSolution();
 }
 
@@ -55,27 +55,17 @@ Solution::Solution(std::vector<int> tasks){
     value = evalSolution();
 }
 
-
-void Solution::generateInitialSolition_v1(){
+void Solution::generateInitialSolution(){
     tasks = std::vector<int>((unsigned long)numberOfTasks);
-    std::cout << "generating initial solution v1" << '\n';
+    int stationIndex = 0;
+    int stationTime = 0;
     for (int i=0; i<numberOfTasks; i++) {
-        tasks[i] = i;
-    }
-}
-
-void Solution::generateInitialSolition_v2(){
-    tasks = std::vector<int>((unsigned long)numberOfTasks);
-    std::cout << "generating initial solution v2" << '\n';
-    int si = 0;
-    int ci = 0;
-    for (int i=0; i<numberOfTasks; i++) {
-        if (ci + taskTimes[i] <= cycleTime) {
-            ci += taskTimes[i];
-            tasks[i] = si;
+        if (stationTime + taskTimes[i] <= cycleTime) {
+            stationTime += taskTimes[i];
+            tasks[i] = stationIndex;
         } else {
-            ci = taskTimes[i];
-            tasks[i] = ++si;
+            stationTime = taskTimes[i];
+            tasks[i] = ++stationIndex;
         }
     }
 }
@@ -194,7 +184,11 @@ void printParameters(){
     std::cout << " -l " << temperatureLimit;
     std::cout << " -d " << decay;
     std::cout << " -i " << iterations;
+    std::cout << " -r " << restarts;
     std::cout << " -s " << seed;
+    if (verbose){
+        std::cout << " -v";
+    }
     std::cout << std::endl;
 }
 
@@ -227,9 +221,9 @@ void Solution::printSolution() {
     std::cout << std::endl;
 }
 
-int main(int argc, char **argv) {
+void getOptions(int argc, char **argv) {
     int opt;
-    while ((opt = getopt(argc, argv, "c:t:d:i:l:s:v")) != -1) {
+    while ((opt = getopt(argc, argv, "c:t:d:i:r:l:s:v")) != -1) {
         switch (opt) {
             case 'c':
                 cycleTime = atoi(optarg);
@@ -237,6 +231,9 @@ int main(int argc, char **argv) {
             case 't':
                 temperature = atof(optarg);
                 initialTemperature = temperature;
+                break;
+            case 'r':
+                restarts = atoi(optarg);
                 break;
             case 'l':
                 temperatureLimit = atof(optarg);
@@ -267,36 +264,43 @@ int main(int argc, char **argv) {
                 break;
         }
     }
+}
+
+int main(int argc, char **argv) {
+    getOptions(argc, argv);
 
     if (seed == 0) {
         seed = (time(NULL));;
     }
+
     srand(static_cast<unsigned int>(seed));
     readInstance();
-    srand((u_int) seed);
 
     Solution currentSolution;
     Solution best = currentSolution;
 
-    long loopCount = 0;
-    while(temperature > temperatureLimit){
-        for(int i=0; i<iterations; i++){
-            Solution neighbour = currentSolution.neighbour();
-            if(neighbour.getValue() < currentSolution.getValue()){
-                currentSolution = neighbour;
-            } else {
-                if(acceptWorseSolution()){
+    for(int res = 0; res < restarts; res++){
+        long loopCount = 0;
+        while(temperature > temperatureLimit){
+            for(int i=0; i<iterations; i++){
+                Solution neighbour = currentSolution.neighbour();
+                if(neighbour.getValue() < currentSolution.getValue()){
                     currentSolution = neighbour;
+                } else {
+                    if(acceptWorseSolution()){
+                        currentSolution = neighbour;
+                    }
+                }
+                if(neighbour.getValue() < best.getValue()){
+                    best = neighbour;
                 }
             }
-            if(neighbour.getValue() < best.getValue()){
-                best = neighbour;
-            }
+            temperature *= decay;
         }
-        temperature *= decay;
-        if (verbose)
-            std::cout << "." << std::flush;
+        temperature = initialTemperature;
+        currentSolution = best;
     }
+
     std::cout << std::endl;
     //print outputs
     if (verbose){
