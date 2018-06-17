@@ -2,23 +2,15 @@ import subprocess
 import time
 import os
 
-# exe = 10
-# instances = {
-#         'MERTENS.IN2': [6, 15, 18],
-#         'MITCHELL.IN2': [14, 35, 26],
-#         'WEE-MAG.IN2': [56, 28, 36, 54]
-#     }
-# iterations = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
-# restarts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-# verbose = True
-
-exe = 3
+exe = 10
 instances = {
         'MERTENS.IN2': [6, 15, 18],
         'MITCHELL.IN2': [14, 35, 26],
+        'WEE-MAG.IN2': [56, 28, 36, 54]
     }
-iterations = [100, 200]
-restarts = [1, 2]
+iterations = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
+restarts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+valuesOnly = True
 verbose = False
 
 for exe in range(exe):
@@ -33,7 +25,9 @@ for exe in range(exe):
 
                     with open('instances/' + instance) as ifile:
                         execution = ["./salbp1-sa", '-c', str(c), '-i', str(i), '-r', str(r)]
-                        if verbose:
+                        if valuesOnly:
+                            execution.append('-p')
+                        elif verbose:
                             execution.append('-v')
 
                         process = subprocess.Popen(execution, stdin=ifile, stdout=subprocess.PIPE)
