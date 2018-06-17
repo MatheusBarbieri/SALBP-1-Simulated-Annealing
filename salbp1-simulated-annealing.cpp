@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <utility>
 #include <vector>
+#include <chrono>
 
 //Instance parameters
 int numberOfTasks;
@@ -26,6 +27,7 @@ long seed = 0;
 
 //misc
 bool verbose = false;
+bool valuesOnly = false;
 
 class Solution{
 private:
@@ -40,8 +42,8 @@ public:
     bool isValidTimes();
     Solution neighbour();
     void printSolution();
-    void printSimple();
-    void generateInitialSolition_v1();
+    void printSimple(float duration);
+    void printValuesOnly(float duration);
     void generateInitialSolution();
 };
 
@@ -166,7 +168,7 @@ void printTimes(){
 }
 
 void printInstance() {
-    std::cout << "\n################### Instance ###################\n";
+    std::cout << "################### Instance ###################\n";
     std::cout << "Seed: " << seed << std::endl;
     std::cout << "Number of tasks: " << numberOfTasks << std::endl;
     std::cout << "Cycle time: " << cycleTime << std::endl;
@@ -176,7 +178,9 @@ void printInstance() {
     std::cout << std::endl;
 }
 
-void printParameters(){
+void printExecution(float duration){
+    std::cout << "################### Execution ###################\n";
+    std::cout << "Duration: " << duration << " seconds.\n";
     std::cout << "Parameters to reproduce this execution:" << std::endl;
     std::cout << "\t-c " << cycleTime;
     std::cout << " -t " << initialTemperature;
@@ -192,11 +196,16 @@ void printParameters(){
     std::cout << std::endl;
 }
 
-void Solution::printSimple(){
+void Solution::printSimple(float duration){
     std::cout << "Seed: " << seed << std::endl;
     std::cout << "Number of tasks: " << numberOfTasks << std::endl;
     std::cout << "Cycle time: " << cycleTime << std::endl;
     std::cout << "Best value: " << getValue() << std::endl;
+    std::cout << "Execution duration: " << duration << std::endl;
+}
+
+void Solution::printValuesOnly(float duration){
+    std::cout << seed << " " << numberOfTasks << " " << cycleTime << " " << getValue() << " " << duration << " " << std::endl;
 }
 
 void Solution::printSolution() {
@@ -223,7 +232,7 @@ void Solution::printSolution() {
 
 void getOptions(int argc, char **argv) {
     int opt;
-    while ((opt = getopt(argc, argv, "c:t:d:i:r:l:s:v")) != -1) {
+    while ((opt = getopt(argc, argv, "c:t:d:i:r:l:s:vp")) != -1) {
         switch (opt) {
             case 'c':
                 cycleTime = atoi(optarg);
@@ -249,6 +258,8 @@ void getOptions(int argc, char **argv) {
                 break;
             case 'v':
                 verbose = true;
+            case 'p':
+                valuesOnly = true;
                 break;
             default:
                 std::cout << "Usage:" << argv[0] << "[OPTIONS]...\n";
@@ -259,7 +270,8 @@ void getOptions(int argc, char **argv) {
                 std::cout << "\t\t-d temperature_decay\n";
                 std::cout << "\t\t-i iterations\n";
                 std::cout << "\t\t-s seed\n";
-                std::cout << "\t\t-v verbose\n";
+                std::cout << "\t\t-v (verbose)\n";
+                std::cout << "\t\t-p (valuesOnly)\n";
                 exit(EXIT_FAILURE);
                 break;
         }
@@ -275,6 +287,8 @@ int main(int argc, char **argv) {
 
     srand(static_cast<unsigned int>(seed));
     readInstance();
+
+    std::chrono::high_resolution_clock::time_point timeBefore = std::chrono::high_resolution_clock::now();
 
     Solution currentSolution;
     Solution best = currentSolution;
@@ -301,14 +315,21 @@ int main(int argc, char **argv) {
         currentSolution = best;
     }
 
-    std::cout << std::endl;
+    std::chrono::high_resolution_clock::time_point timeAfter = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(timeAfter - timeBefore).count();
+    auto durationSec = duration/1000000.0;
+
     //print outputs
-    if (verbose){
-        printInstance();
-        best.printSolution();
-        printParameters();
+    if (valuesOnly){
+        best.printValuesOnly(durationSec);
     } else {
-        best.printSimple();
+        if (verbose){
+            printInstance();
+            best.printSolution();
+            printExecution(durationSec);
+        } else {
+            best.printSimple(durationSec);
+        }
     }
 
     return 0;
