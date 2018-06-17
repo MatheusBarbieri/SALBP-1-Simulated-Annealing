@@ -27,7 +27,7 @@ long seed = 0;
 
 //misc
 bool verbose = false;
-bool valuesOnly = false;
+bool csv = false;
 
 class Solution{
 private:
@@ -43,7 +43,7 @@ public:
     Solution neighbour();
     void printSolution();
     void printSimple(float duration);
-    void printValuesOnly(float duration);
+    void printCsv(float duration);
     void generateInitialSolution();
 };
 
@@ -204,8 +204,14 @@ void Solution::printSimple(float duration){
     std::cout << "Execution duration: " << duration << std::endl;
 }
 
-void Solution::printValuesOnly(float duration){
-    std::cout << seed << " " << numberOfTasks << " " << cycleTime << " " << getValue() << " " << duration << " " << std::endl;
+void Solution::printCsv(float duration){
+    std::cout << seed << "; " <<
+                 numberOfTasks << "; " <<
+                 cycleTime << "; " <<
+                 iterations << "; " <<
+                 restarts << "; " <<
+                 getValue() << "; " <<
+                 duration << ";";
 }
 
 void Solution::printSolution() {
@@ -259,7 +265,7 @@ void getOptions(int argc, char **argv) {
             case 'v':
                 verbose = true;
             case 'p':
-                valuesOnly = true;
+                csv = true;
                 break;
             default:
                 std::cout << "Usage:" << argv[0] << "[OPTIONS]...\n";
@@ -271,7 +277,7 @@ void getOptions(int argc, char **argv) {
                 std::cout << "\t\t-i iterations\n";
                 std::cout << "\t\t-s seed\n";
                 std::cout << "\t\t-v (verbose)\n";
-                std::cout << "\t\t-p (valuesOnly)\n";
+                std::cout << "\t\t-p (csv)\n";
                 exit(EXIT_FAILURE);
                 break;
         }
@@ -320,8 +326,8 @@ int main(int argc, char **argv) {
     auto durationSec = duration/1000000.0;
 
     //print outputs
-    if (valuesOnly){
-        best.printValuesOnly(durationSec);
+    if (csv){
+        best.printCsv(durationSec);
     } else {
         if (verbose){
             printInstance();
