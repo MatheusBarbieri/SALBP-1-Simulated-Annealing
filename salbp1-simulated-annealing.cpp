@@ -264,6 +264,7 @@ void getOptions(int argc, char **argv) {
                 break;
             case 'v':
                 verbose = true;
+                break;
             case 'p':
                 csv = true;
                 break;
