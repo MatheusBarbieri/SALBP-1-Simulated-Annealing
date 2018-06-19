@@ -1,0 +1,37 @@
+
+################### Solution ###################
+Best value: 32
+Used Stations: 
+	Station 1 tasks: 1, 2
+	Station 2 tasks: 3, 4
+	Station 3 tasks: 5, 6, 7
+	Station 4 tasks: 8, 9
+	Station 5 tasks: 10, 11
+	Station 6 tasks: 12, 13, 14, 15
+	Station 7 tasks: 16, 17, 18
+	Station 8 tasks: 19, 20
+	Station 9 tasks: 21, 22
+	Station 10 tasks: 23, 24
+	Station 11 tasks: 25, 26
+	Station 12 tasks: 27, 28, 29, 30
+	Station 13 tasks: 31, 32
+	Station 14 tasks: 33, 34
+	Station 15 tasks: 35, 36, 37
+	Station 16 tasks: 38, 39
+	Station 17 tasks: 40, 41, 42
+	Station 18 tasks: 43, 44, 45
+	Station 19 tasks: 46, 47
+	Station 20 tasks: 48, 49
+	Station 21 tasks: 50, 51
+	Station 22 tasks: 52, 53
+	Station 23 tasks: 54, 55
+	Station 24 tasks: 56, 57
+	Station 25 tasks: 58, 59
+	Station 26 tasks: 60, 61
+	Station 27 tasks: 62, 63
+	Station 28 tasks: 64, 65, 66
+	Station 29 tasks: 67, 68
+	Station 30 tasks: 69, 70
+	Station 31 tasks: 71, 72, 73
+	Station 32 tasks: 74, 75
+

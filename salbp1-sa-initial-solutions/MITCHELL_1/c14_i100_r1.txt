@@ -1,0 +1,15 @@
+
+################### Solution ###################
+Best value: 10
+Used Stations: 
+	Station 1 tasks: 1, 2
+	Station 2 tasks: 3, 4
+	Station 3 tasks: 5, 6
+	Station 4 tasks: 7
+	Station 5 tasks: 8, 9, 10
+	Station 6 tasks: 11, 12, 13, 14
+	Station 7 tasks: 15, 16
+	Station 8 tasks: 17
+	Station 9 tasks: 18, 19, 20
+	Station 10 tasks: 21
+

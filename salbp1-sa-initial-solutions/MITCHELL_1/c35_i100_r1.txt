@@ -1,0 +1,9 @@
+
+################### Solution ###################
+Best value: 4
+Used Stations: 
+	Station 1 tasks: 1, 2, 3, 4, 5, 6
+	Station 2 tasks: 7, 8, 9, 10, 11, 12, 13, 14
+	Station 3 tasks: 15, 16, 17, 18, 19, 20
+	Station 4 tasks: 21
+

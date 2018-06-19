@@ -1,0 +1,67 @@
+
+################### Solution ###################
+Best value: 62
+Used Stations: 
+	Station 1 tasks: 1
+	Station 2 tasks: 2
+	Station 3 tasks: 3
+	Station 4 tasks: 4
+	Station 5 tasks: 5
+	Station 6 tasks: 6, 7
+	Station 7 tasks: 8
+	Station 8 tasks: 9
+	Station 9 tasks: 10
+	Station 10 tasks: 11
+	Station 11 tasks: 12, 13
+	Station 12 tasks: 14, 15
+	Station 13 tasks: 16
+	Station 14 tasks: 17, 18
+	Station 15 tasks: 19
+	Station 16 tasks: 20
+	Station 17 tasks: 21
+	Station 18 tasks: 22
+	Station 19 tasks: 23
+	Station 20 tasks: 24
+	Station 21 tasks: 25
+	Station 22 tasks: 26
+	Station 23 tasks: 27
+	Station 24 tasks: 28, 29, 30
+	Station 25 tasks: 31
+	Station 26 tasks: 32
+	Station 27 tasks: 33
+	Station 28 tasks: 34
+	Station 29 tasks: 35, 36
+	Station 30 tasks: 37
+	Station 31 tasks: 38
+	Station 32 tasks: 39
+	Station 33 tasks: 40, 41
+	Station 34 tasks: 42
+	Station 35 tasks: 43, 44
+	Station 36 tasks: 45
+	Station 37 tasks: 46, 47
+	Station 38 tasks: 48
+	Station 39 tasks: 49
+	Station 40 tasks: 50
+	Station 41 tasks: 51
+	Station 42 tasks: 52
+	Station 43 tasks: 53
+	Station 44 tasks: 54
+	Station 45 tasks: 55
+	Station 46 tasks: 56
+	Station 47 tasks: 57
+	Station 48 tasks: 58
+	Station 49 tasks: 59
+	Station 50 tasks: 60
+	Station 51 tasks: 61
+	Station 52 tasks: 62
+	Station 53 tasks: 63
+	Station 54 tasks: 64
+	Station 55 tasks: 65, 66
+	Station 56 tasks: 67
+	Station 57 tasks: 68
+	Station 58 tasks: 69
+	Station 59 tasks: 70
+	Station 60 tasks: 71, 72
+	Station 61 tasks: 73, 74
+	Station 62 tasks: 75
+

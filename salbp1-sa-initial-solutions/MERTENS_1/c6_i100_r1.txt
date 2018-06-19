@@ -1,0 +1,11 @@
+
+################### Solution ###################
+Best value: 6
+Used Stations: 
+	Station 1 tasks: 1, 2
+	Station 2 tasks: 3
+	Station 3 tasks: 4
+	Station 4 tasks: 5
+	Station 5 tasks: 6
+	Station 6 tasks: 7
+
